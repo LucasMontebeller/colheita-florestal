@@ -4,7 +4,6 @@
  * Creation Date: 17/09/2020 at 21:56:07
  *********************************************/
 
- 
  nL = 6; //nº de lotes
  nT = 3;  //nº de talhões
  nV = 2;  //nº de veiculos
