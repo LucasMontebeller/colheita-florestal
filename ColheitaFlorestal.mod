@@ -40,7 +40,9 @@ dvar float+ C[e in E, a in 0..nT+1];
 //dvar float P[e in E, a in 0..nT+1];  //momento que a empilhadeira 'e' deixa o talh�o 'a'
 
 // Tempo que o primeiro veiculo começa a ser atendido em 'a'
+/*
 dvar float+ F[a in T];
+*/
 
 dvar float M; 
 
@@ -157,24 +159,29 @@ forall(e in E, a in T)
 // 'b' deve ser maior ou igual o tempo que ela chega no talh�o 'a' + 
 // 'todos os tempo de carregamento de lotes desse talh�o' + 'tempo de deslocamento 
 // de 'a' para 'b'
-forall(e in E, a in T, b in T:a!=b)
-  (Y[e,a,b]==1) => (C[e,b] >= F[a] + TC + De[a,b]);
-
+/*
+forall(e in E, a in T, b in T:a!=b && a != 0)
+  (Y[e,a,b]==1) => (C[e,b] >= C[e,a] + TC + De[a,b]);
+*/
 // Comentário: C na verdade é o instante que a empilhadeira 'e' CHEGA no talhão 'a'. 
 // Ainda assim, é necessário incluir o tempo de chegada do primeiro veiculo neste talhao, pois ela nao atende ele no instante zero.
+/*
 forall(a in T)
   F[a] == min(i in L: LE[a, i] == 1) H[i];
+*/  
+
+forall(e in E, b in T: b != 0)
+  (Y[e, 0, b] == 1) => (C[e, b] == min(i in L: LE[b, i] == 1) H[i]);
   
-// Para melhorar a performance, podemos eliminar a necessidade da variável F[a], igualando essa restrição com a anterior.
-forall(e in E, b in T)
-  (Y[e, 0, b] == 1) => (C[e, b] == F[b]);
 
 // Restricao Mais Pesada
 //(21) se a empilhadeira 'e' atende o talh�o 'b' ap�s o 'a' e o lote i pertence a 'a', ent�o
 // o instante de atendimento do lote i deve ser maior do que o tempo de chegada dessa 
 // empilhadeira no lote 'a' e menos do que a chegada em 'b' menos o deslocamento de 'a' para 'b' 
 forall(e in E, a in 0..nT+1, b in 0..nT+1, i in L:a!=b && LE[a,i]==1 ) //&& LE[b,j]==1)
-  (Y[e,a,b]==1) => ((H[i] >= C[e,a]) && (H[i] <= C[e,b] - De[a,b]));
+  (Y[e,a,b]==1) => ((H[i] >= C[e,a]) && (H[i] <= C[e,b] - De[a,b] - TC));
+  
+  
 };
 
 // Restricao adicional corrigida
