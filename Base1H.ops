@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings version="2">
+  <category name="cplex">
+    <setting name="optimalitytarget" value="3"/>
+    <setting name="tilim" value="3600.0"/>
+  </category>
+</settings>
