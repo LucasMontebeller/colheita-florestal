@@ -1,8 +1,14 @@
+/*********************************************
+ * OPL 20.1.0.0 Data
+ * Author: gabid
+ * Creation Date: 22 de mai de 2024 at 09:38:23
+ *********************************************/
+// G2-v8
 
  nL = 22; //nº de lotes
  nT = 4;  //nº de talhões
- nV = 12;  //nº de veiculos
- nE = 2;  //nº de empilhadeiras
+ nV = 8;  //nº de veiculos
+ nE = 3;  //nº de empilhadeiras
  TC = 0.5;  //Tempo de Carregamento
  
  qT = [7,4, 5, 6]; //quantidade de lotes por talhão
@@ -27,5 +33,4 @@ LE = [
  [0,  8, 11, 15,  0, 0],
  [0,  0,  0,  0,  0, 0],
  ];
- 
  
